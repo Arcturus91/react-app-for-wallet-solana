@@ -1,15 +1,16 @@
 import { clusterApiUrl } from '@solana/web3.js';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter, } from '@solana/wallet-adapter-wallets';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import { ConnectionProvider, WalletProvider,useConnection, useWallet  } from '@solana/wallet-adapter-react';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-
+import * as solanaWeb3 from '@solana/web3.js';
 import { useMemo } from 'react';
 
 require('./App.css');
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 const App = () => {
+ 
     return (
         <Context>
             <Content />
@@ -43,9 +44,11 @@ const Context = ({ children }) => {
 };
 
 const Content = () => {
+    console.log("i am web3, buttonn",solanaWeb3);
     return (
         <div className="App">
             <WalletMultiButton />
         </div>
     );
 };
+
