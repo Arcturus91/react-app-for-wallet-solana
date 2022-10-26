@@ -2,9 +2,10 @@ import { clusterApiUrl } from '@solana/web3.js';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { PhantomWalletAdapter, } from '@solana/wallet-adapter-wallets';
 import { ConnectionProvider, WalletProvider,useConnection, useWallet  } from '@solana/wallet-adapter-react';
-import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { WalletModalProvider, WalletMultiButton,WalletDisconnectButton } from '@solana/wallet-adapter-react-ui';
 import * as solanaWeb3 from '@solana/web3.js';
 import { useMemo } from 'react';
+import {Navbar, SendSOLToRandomAddress} from './components'
 
 require('./App.css');
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -29,7 +30,6 @@ const Context = ({ children }) => {
     const wallets = useMemo(
         () => [
             new PhantomWalletAdapter(),
-            
         ],
         []
     );
@@ -37,7 +37,9 @@ const Context = ({ children }) => {
     return (
         <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>{children}</WalletModalProvider>
+                <WalletModalProvider>
+                {children}
+                </WalletModalProvider>
             </WalletProvider>
         </ConnectionProvider>
     );
@@ -47,7 +49,12 @@ const Content = () => {
     console.log("i am web3, buttonn",solanaWeb3);
     return (
         <div className="App">
+        
+       <SendSOLToRandomAddress/>
             <WalletMultiButton />
+       
+            
+
         </div>
     );
 };
